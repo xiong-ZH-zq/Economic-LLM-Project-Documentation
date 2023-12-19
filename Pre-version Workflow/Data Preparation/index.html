@@ -1,0 +1,905 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../Data%20Slice/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+    
+    
+      
+        <title>数据准备 - Financial LLM Project Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"PT Serif";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Financial LLM Project Documentation" class="md-header__button md-logo" aria-label="Financial LLM Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Financial LLM Project Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              数据准备
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  项目简介
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  项目先版本流程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../LLM%20Fine%20Tuning/Tuning%20Approaches/" class="md-tabs__link">
+          
+  
+  模型微调
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Financial LLM Project Documentation" class="md-nav__button md-logo" aria-label="Financial LLM Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Financial LLM Project Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    项目简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    项目先版本流程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            项目先版本流程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    数据准备
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    数据准备
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据准备流程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      PDF转存年报
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PDF转存年报">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      解析与抽取
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      页面召回
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      表格识别
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据集样式示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据集样式示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#json" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据集JSON样式示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data%20Slice/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据切分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Data%20Process/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据处理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataBase%20Storage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据库存储
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FAQ/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    模型问答流程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    模型微调
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            模型微调
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM%20Fine%20Tuning/Tuning%20Approaches/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    模型微调流程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据准备流程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      PDF转存年报
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PDF转存年报">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      解析与抽取
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      页面召回
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      表格识别
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据集样式示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据集样式示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#json" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据集JSON样式示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>数据准备</h1>
+
+<h2 id="_1">数据准备流程</h2>
+<p>数据准备的流程可以细分如下：</p>
+<ol>
+<li><strong>PDF文本和表格提取</strong>：使用如pdfplumber、pdfminer等工具包提取PDF文件中的文本和表格数据。</li>
+<li><strong>数据切分</strong>：根据PDF文件的目录、子目录和章节信息，对内容进行精确的切块处理。</li>
+<li><strong>构建基础金融数据库</strong>：依据金融知识和PDF内容，设计专业的金融数据库字段和格式。例如，定义资产负债表、现金流量表和利润表等。</li>
+<li><strong>信息提取</strong>：使用大模型的信息提取能力和NLP技术来抽取对应的金融字段信息。例如，使用JSON方式输出目录的内容，其中章节的名称作为key，页码作为value。同时，请详细地抽取表格内的数据，以JSON格式输出。</li>
+<li>构建金融知识问答库：结合构建的金融数据库，应用大模型构建基础的金融问答库。例如：<br />
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="err">：</span><span class="s2">&quot;某公司2021年的财务费用为多少元？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;某公司2021年的财务费用为XXXX元。&quot;</span><span class="p">}</span>
+<span class="c1">// (1) prompt:用多种句式修改question及answer的内容。</span>
+
+<span class="p">{</span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="s2">&quot;为什么财务费用可以是负的？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">}</span>
+<span class="c1">// (2) prompt：请模仿上面的question给出100个类似的问题与对应的答案，用JSON输出。</span>
+</code></pre></div></li>
+<li><strong>构建向量库</strong>：借助于如Word2Vec、Text2Vec等技术，从原始文本数据中提取出语义向量。使用pgvector这种基于PostgreSQL的扩展来存储和索引这些向量，从而建立起一个可供高效查询的大规模向量库。</li>
+<li><strong>应用</strong>：结合向量库、大模型、langchain等工具，提升应用效果。</li>
+</ol>
+<p>为提高团队工作效率，给工程整体绘制一个清晰的框架蓝图，我们构建了如图所示的工作流：<br />
+<img alt="模型工作流" src="../../assets/%E6%A8%A1%E5%9E%8B%E5%B7%A5%E4%BD%9C%E6%B5%81.png" /></p>
+<h2 id="pdf">PDF转存年报</h2>
+<h3 id="_2">解析与抽取</h3>
+<p>年报文件主要以 PDF 格式呈现，为保证数据可以准确地提取出来，我们采用 pdfplumber 进行提取工作。</p>
+<p><code>extract_table()</code>、<code>find_tables()</code> 是 pdfplumber 中用于从 PDF 中提取表格数据的函数。该函数可以接受一个可选的参数字典，用于更精细地控制表格数据的提取过程。下面介绍一些常用的参数，仅供参考：</p>
+<ul>
+<li><code>vertical_strategy</code>：用于指定垂直方向上的表格线提取策略，可以是 “lines”、“text” 或 “mixed” 中的任意一种，默认值为 “lines”。</li>
+<li><code>horizontal_strategy</code>：用于指定水平方向上的表格线提取策略，可以是 “lines”、“text” 或 “mixed” 中的任意一种，默认值为 “lines”。</li>
+<li><code>snap_tolerance</code>：用于指定在表格提取过程中两个元素之间的距离阈值，如果它们之间的距离小于该值，则会被视为同一元素。默认值为 3。</li>
+<li><code>join_tolerance</code>：用于指定在表格提取过程中两个单元格相连时的距离阈值，如果它们之间的距离小于该值，则它们将被合并为同一个单元格。默认值为 2。</li>
+<li><code>edge_min_length</code>：用于指定在表格提取过程中一个元素的边缘与页面边缘之间的距离阈值，如果它们之间的距离小于该值，则该元素将被忽略。默认值为 10。</li>
+<li><code>min_words</code>：用于指定一个单元格必须包含的最少文本块数目，默认值为 1。<br />
+snap_x_tolerance：用于在表格提取过程中校正列位置的参数，允许水平方向上的一些偏离。默认值为 <code>None</code>。</li>
+<li><code>snap_y_tolerance</code>：用于在表格提取过程中校正行位置的参数，允许垂直方向上的一些偏离。默认值为 <code>None</code>。</li>
+<li><code>intersection_x_tolerance</code>：用于调整表格列位置的参数，允许一些列交叉或合并。默认值为 <code>None</code>。</li>
+</ul>
+<p>因为pdf2txt非常的复杂多变，且麻烦。故我们组在以上pdf2txt程序的使用过程中进行了一定的创新举措和微调处理。</p>
+<p>先glob读取文件排序，再送入15个进程的进程池进行多进程处理。按pdf.pages页遍历处理，每页通过page遍历存储，通过 <code>extract_text_and_tables</code> 函数提取文本和表格，其中表格使用 <code>page.find_tables()</code> 获取到表格数据，遍历表格开始处理，一旦有表格了，那么表格和文本都需要提取，通过 <code>check_lines</code> 函数，提取文本，得到按行的文本，通过 <code>new_table = table.extract()</code> 合并或者去掉一些多余的项，进而得到表格文本；如果没找到表格，调用 <code>check_lines</code> 得到文本，并处理页眉页脚。</p>
+<p>更加重要的是，我们所做的大模型是针对年报数据的，所以文本转换也必须针对年报类文件，这提供了方便。但问题在于这样有针对性的代码里用了很多正则，碰到某些财报必须人工调整靠肉眼看总结出来。</p>
+<p>经过暑假一个月的陆续调整以及聘请专人做人工标注我们基本积累出共计约一万份财报结构化数据。最后我们把输出按行保存 JSON 格式文本到 alltxt2 目录中，文件名变为 <code>.txt</code> 后缀。</p>
+<p>输出效果示例：<br />
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">165</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[&#39;受的政府补助除外）&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;]&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">166</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[&#39;委托他人投资或管理资产的损益&#39;, &#39;11,983,529.98&#39;, &#39;9,660,508.21&#39;, &#39;4,469,117.34&#39;, &#39;&#39;]&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">167</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">168</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;页脚&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">171</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[&#39;除同公司正常经营业务相关的有效套期保&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;]&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">172</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[&#39;值业务外，持有交易性金融资产、衍生金&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;]&quot;</span><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="_3">页面召回</h3>
+<p>模型应可通过查找到的信息索引到对应的页。</p>
+<h3 id="_4">表格识别</h3>
+<p>我们考虑应用 camelot-py 实现基于图像识别的表格提取，</p>
+<div class="highlight"><pre><span></span><code><span class="n">row_keywords</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;在职员工&quot;</span><span class="p">,</span><span class="s2">&quot;职工人数&quot;</span><span class="p">,</span><span class="s2">&quot;专业构成&quot;</span><span class="p">,</span><span class="s2">&quot;离退休职&quot;</span><span class="p">,</span>
+<span class="s2">&quot;生产人员&quot;</span><span class="p">,</span><span class="s2">&quot;销售人员&quot;</span><span class="p">,</span><span class="s2">&quot;技术人员&quot;</span><span class="p">,</span>
+<span class="s2">&quot;行政人员&quot;</span><span class="p">,</span><span class="s2">&quot;管理人员&quot;</span><span class="p">,</span><span class="s2">&quot;业务人员&quot;</span><span class="p">,</span><span class="s2">&quot;教育程度&quot;</span><span class="p">,</span><span class="s2">&quot;硕士&quot;</span><span class="p">,</span><span class="s2">&quot;本科&quot;</span><span class="p">,</span><span class="s2">&quot;大专&quot;</span><span class="p">,</span><span class="s2">&quot;研究生&quot;</span><span class="p">,</span>
+<span class="s2">&quot;专科&quot;</span><span class="p">]</span>
+<span class="n">ei_tables</span> <span class="o">=</span> <span class="n">extract_table_for_rows</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1.5</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">row_keywords</span><span class="p">)),</span><span class="n">min_match_number</span><span class="o">=</span><span class="mf">0.3</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">row_keywords</span><span class="p">),</span><span class="n">required_line_keywords</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;员工情况&quot;</span><span class="p">,</span><span class="s2">&quot;员工的数量&quot;</span><span class="p">,</span><span class="s2">&quot;员工数量&quot;</span><span class="p">,</span><span class="s2">&quot;专业构成&quot;</span><span class="p">,</span><span class="s2">&quot;离退休职工人数&quot;</span><span class="p">,</span><span class="s2">&quot;员工教育结构&quot;</span><span class="p">],</span><span class="n">invalid_line_keywords</span><span class="o">=</span><span class="p">[],</span>
+<span class="n">required_post_keywords</span><span class="o">=</span> <span class="n">row_keywords</span><span class="p">,</span>
+<span class="n">invalid_pre_keywords</span><span class="o">=</span><span class="p">[],</span>
+<span class="n">invalid_post_keywords</span><span class="o">=</span><span class="p">[],</span>
+<span class="n">prefix_pages</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">post_pages</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">invalid_keywords</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;其他单位&quot;</span><span class="p">,</span><span class="s2">&quot;董事&quot;</span><span class="p">,</span><span class="s2">&quot;经理&quot;</span><span class="p">,</span><span class="s2">&quot;审议&quot;</span><span class="p">]</span>
+<span class="n">filtered_tables</span> <span class="o">=</span> <span class="n">filter_tables</span><span class="p">(</span><span class="n">ei_tables</span><span class="p">,</span> <span class="n">invalid_keywords</span><span class="p">)</span>
+</code></pre></div>
+<p>以一份年报中的实际表格为例，源文件当中表格如下：<br />
+<img alt="" src="../../assets/%E5%B9%B4%E6%8A%A5%E8%A1%A8%E6%A0%BC%E6%BA%90%E6%96%87%E4%BB%B6.png" /></p>
+<p>目标即从该 PDF 中的原表格中提取出 JSON 格式的表格以方便后续信息提取，并以<strong>关系模型</strong>的形式（可理解为类似 Excel 当中的表格）存入关系数据库当中。</p>
+<p>最终提取出的 JSON 格式文件形如下图：</p>
+<p><img alt="提取JSON文件图像" src="../../assets/%E5%B9%B4%E6%8A%A5%E8%A1%A8%E6%A0%BC%E6%8F%90%E5%8F%96JSON%E6%96%87%E4%BB%B6.png" /></p>
+<h2 id="_5">数据集样式示例</h2>
+<h3 id="json">数据集JSON样式示例</h3>
+<p>训练模型所需要的数据集主要包含两个特征：<code>question</code> 和 <code>answer</code> ，</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年其他流动资产第12高的是哪家上市公司？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年其他流动资产第12高的公司是苏美达股份有限公司。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;注册地址在重庆的上市公司中，2021年营业收入大于5亿的有多少家？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年注册在重庆，营业收入大于5亿的公司一共有4家。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;广东华特气体股份有限公司2021年的职工总人数为？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年广东华特气体股份有限公司职工总人数是1044人。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;在保留两位小数的情况下，请计算出金钼股份2019年的流动负债比率&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019金钼股份流动负债比率是61.10%。其中流动负债是1068418275.97元；总负债是1748627619.69元；&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019年负债总金额最高的上市公司为？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019年负债合计最高的是上海汽车集团股份有限公司。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019年总资产最高的前五家上市公司是哪些家？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019年资产总计最高前五家是上海汽车集团股份有限公司、中远海运控股股份有限公司、国投电力控股股份有限公司、华域汽车系统股份有限公司、广州汽车集团股份有限公司。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020年营业收入最高的3家并且曾经在宁波注册的上市公司是？金额是？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;注册在宁波，2020年营业收入最高的3家是宁波均胜电子股份有限公司营业收入47889837616.15元；宁波建工股份有限公司营业收入19796854240.57元；宁波继峰汽车零部件股份有限公司营业收入15732749552.37元。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;注册地址在苏州的上市公司中，2020年利润总额大于5亿的有多少家？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020年注册在苏州，利润总额大于5亿的公司一共有2家。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;浙江运达风电股份有限公司在2019年的时候应收款项融资是多少元？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019年浙江运达风电股份有限公司应收款项融资是51086824.07元。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;神驰机电股份有限公司2020年的注册地址为？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020年神驰机电股份有限公司注册地址是重庆市北碚区童家溪镇同兴北路200号。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019年山东惠发食品股份有限公司营业外支出和营业外收入分别是多少元？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019年山东惠发食品股份有限公司营业外收入是1018122.97元；营业外支出是2513885.46元。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;福建广生堂药业股份有限公司2020年年报中提及的财务费用增长率具体是什么？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020福建广生堂药业股份有限公司财务费用增长率是34.33%。其中，财务费用是7766850.48元；上年财务费用是5781839.51元。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;华灿光电股份有限公司2021年的法定代表人与上年相比相同吗？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;不相同，华灿光电股份有限公司2020年法定代表人是俞信华，2021年法定代表人是郭瑾。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;请具体描述一下2020年仲景食品控股股东是否发生变更。&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020年，仲景食品控股股东没有发生变更。&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;什么是其他债权投资？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;其他债权投资是指企业或机构投资者通过购买债券、贷款、定期存款等金融产品获得的固定收益。这些金融产品通常由政府、公司或其他机构发行，具有一定的信用等级和风险。\n\n其他债权投资是企业或机构投资组合中的一部分，通常用于稳定收益和分散风险。与股票投资相比，其他债权投资的风险较低，但收益也相对较低。\n\n其他债权投资的管理和投资策略与其他资产类别类似，包括分散投资、风险控制、收益最大化等。然而，由于其他债权投资的种类繁多，其投资和管理也存在一定的特殊性。&quot;</span><span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+      
+    
+  </body>
+</html>
