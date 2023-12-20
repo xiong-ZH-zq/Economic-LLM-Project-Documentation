@@ -59,3 +59,6 @@ nav:
     - 模型问答流程: Pre-version Workflow/FAQ.md
   - 模型微调:
     - 模型微调流程: LLM Fine Tuning/Tuning Approaches.md
+  - 团队知识库:
+    - 大模型知识笔记: 
+      - Transformer架构: Knowledge Archive/Transformer.md
