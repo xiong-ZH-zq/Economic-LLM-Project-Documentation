@@ -1,0 +1,61 @@
+site_name: Financial LLM Project Documentation
+theme:
+  name: material
+  palette: 
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+      primary: red
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+      primary: blue grey
+  features:
+    - navigation.tabs
+  font:
+    text: PT Serif
+
+markdown_extensions:
+  - meta
+  - nl2br
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tilde
+  - pymdownx.arithmatex:
+        generic: true
+
+plugins:
+  - search
+  - callouts
+
+extra_javascript:
+  - javascripts/katex.js 
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js
+extra_css:
+  - stylesheets/extra.css
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+
+extra: 
+  attachments: "assets"
+
+nav:
+  - 项目简介: index.md
+  - 项目先版本流程: 
+    - 数据准备: Pre-version Workflow/Data Preparation.md
+    - 数据切分: Pre-version Workflow/Data Slice.md 
+    - 数据处理: Pre-version Workflow/Data Process.md
+    - 数据库存储: Pre-version Workflow/DataBase Storage.md
+    - 模型问答流程: Pre-version Workflow/FAQ.md
+  - 模型微调:
+    - 模型微调流程: LLM Fine Tuning/Tuning Approaches.md

@@ -1,0 +1,987 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../Pre-version%20Workflow/FAQ/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+    
+    
+      
+        <title>模型微调流程 - Financial LLM Project Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"PT Serif";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Financial LLM Project Documentation" class="md-header__button md-logo" aria-label="Financial LLM Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Financial LLM Project Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              模型微调流程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  项目简介
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Pre-version%20Workflow/Data%20Preparation/" class="md-tabs__link">
+          
+  
+  项目先版本流程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  模型微调
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Financial LLM Project Documentation" class="md-nav__button md-logo" aria-label="Financial LLM Project Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Financial LLM Project Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    项目简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    项目先版本流程
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            项目先版本流程
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pre-version%20Workflow/Data%20Preparation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据准备
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pre-version%20Workflow/Data%20Slice/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据切分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pre-version%20Workflow/Data%20Process/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据处理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pre-version%20Workflow/DataBase%20Storage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据库存储
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pre-version%20Workflow/FAQ/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    模型问答流程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    模型微调
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            模型微调
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    模型微调流程
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    模型微调流程
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题分类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      建立微调数据库
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题回答策略
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="问题回答策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本信息查询类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      计算分析类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      公司信息类
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化方向
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="优化方向">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      准确性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      速度
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      通用性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题分类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      建立微调数据库
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题回答策略
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="问题回答策略">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本信息查询类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      计算分析类
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      公司信息类
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化方向
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="优化方向">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      准确性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      速度
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      通用性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">模型微调流程</h1>
+<h2 id="_2">问题分类</h2>
+<p>问题的基本分类有助于模型给出不同形式、更有针对性的答案，问题分类可以大致分为如下四类：</p>
+<ul>
+<li><strong>基本信息查询</strong>：例如证券信息、股票简称、股票代码、外文名称、法定代表人、注册地址、办公地址、公司网址、电子信箱等；</li>
+<li><strong>公司员工信息</strong>：例如员工人数、员工专业、员工教育程度等等；</li>
+<li><strong>财务相关</strong>：例如：金额、费用、资产、收入等等；</li>
+<li><strong>开放式问题</strong>.</li>
+</ul>
+<p>将输入问题分为以上四类，模型需要能在给定一个输入问题时迅速输出问题类别，例如：</p>
+<div class="highlight"><pre><span></span><code>输入：XX公司法定代表人是谁？
+输出：基本信息查询类
+</code></pre></div>
+<p>分类依据在于年报的资料和问题描述本身的文字，一些可用的判断依据有：</p>
+<ul>
+<li>是否包含<strong>公司名称/年份</strong>；</li>
+<li>能否匹配到<strong>报表字段</strong>；</li>
+<li>能否匹配到<strong>公式</strong>；</li>
+<li>特殊词汇；</li>
+</ul>
+<p>问题分类后，不同的问题可以检索不同的部分获取结果：</p>
+<ul>
+<li>计算类问题需要根据问题类型<strong>检索计算因子</strong>来完成计算；</li>
+<li>统计分析问题需要根据问题类型分析条件检索来获取结果；</li>
+<li>开放性问题根据问题关键词来<strong>检索全文相关匹配</strong>来回答问题 </li>
+</ul>
+<h2 id="_3">建立微调数据库</h2>
+<ol>
+<li>一开始的微调效果较差，分析后发现是训练字段小于传入模版问题的字符串，导致训练过程中的传入字段丢失截断。loss大于0.2，实用情况比较糟糕。 </li>
+<li>通过统计问题和答案长度，调整了 <code>max_source_length</code> 参数符合 <code>max</code>（问题+答案）的条件，确认了 <code>max_source_length</code> 为 <code>512</code>， <code>max_target_length</code> 为128，使用 ptuning 对 Llama2 进行微调训练，step为250.在这个微调策略下训练结果loss到了0.09，可用。 </li>
+<li>为了获取更好的效果，尝试对 prompt 不断进行调整，从一开始的只有选项的题目，到有一定信息的选项描述（高频的关键字等），同时对训练 step 加大到 400，对微调训练有很大的帮助， loss 的下降比较明显, 最优平均值达到 0.01 以下，拥有比较优秀的分类能力。 </li>
+<li>尝试调低 Learning Rate 可以获得更快的训练收敛效益。</li>
+</ol>
+<p><img alt="Loss Line" src="../../assets/%E8%AE%AD%E7%BB%83%E6%8D%9F%E5%A4%B1%E6%9B%B2%E7%BA%BF.png" /></p>
+<p>为了能提高调取数据的效率，考虑使用 NL2SQL 技术，通过模型对话直接输出 SQL 语句，从而提高调取效率。但是在开始的尝试中我们失败了：尝试用公共的NL2SQL训练集，其中主题较为多样驳杂，包含电影、书籍、评价、金融等等。没有能够很好对数据进行SQL生成，基于这个数据集尝试后会发现大模型会失去基本对话能力。</p>
+<p>根据失败尝试，我们认为要想稳定生产准确有效SQL语言，是需要根据实际的任务情况和方向来设定训练目标。</p>
+<p>为了加快效率，直接利用开源大模型来协助生成不同提问模板，再透过字段的随机条件填充。构建针对其模版格式的问题训练集，我们自己设定了四个模版利用大模型推广扩充出了24种不同问法，强化了除了查询以外的SQL语句，如排序，输出范围，统计计数，条件求和，单字段检索，多字段检索，多字段检索多字段，字段的过滤等，不同比较级的语言描述（高低，大小，多少，否定词+理想，中文数字和阿拉伯数字）。这些扩充和进一步的具体问题模板是为了应对无日志调优情况下，SQL语句广谱性挑战。</p>
+<p><img alt="" src="../../assets/%E5%BE%AE%E8%B0%83%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%84%E9%80%A0.png" /><br />
+<img alt="" src="../../assets/Prompt%E6%9B%BF%E6%8D%A2.png" /></p>
+<p>示例代码：</p>
+<ul>
+<li>2019年负债总金额第7高的上市公司为？<br />
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="err">公司全称</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">company_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="err">年份</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2019&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="err">负债合计</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="err">负债合计</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">OFFSET</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span>
+</code></pre></div></li>
+<li>2020年其他流动资产最高的前三家上市公司是哪些家？ <br />
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="err">公司全称</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">company_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="err">年份</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2020&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="err">其他流动资产</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="err">其他流动资产</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span>
+</code></pre></div></li>
+<li>2020年营业总收入最高的7家并且曾经在武汉注册的上市公司是？金额是？<br />
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="err">公司全称</span><span class="p">,</span><span class="w"> </span><span class="err">营业总收入</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">company_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="err">年份</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2020&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="err">注册地址</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%武汉%&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="err">营业总收入</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="err">营业总收入</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span>
+</code></pre></div></li>
+</ul>
+<h2 id="_4">问题回答策略</h2>
+<h3 id="_5">基本信息查询类</h3>
+<p>问题解决策略流程图：<br />
+<pre class="mermaid"><code>flowchart LR
+A["用户提问"]
+B["匹配加载报表"]
+C["组合信息生成 prompt"]
+D["模型输出"]
+E["是否包含文字类字段"]
+F["加入文本比较信息"]
+A--&gt;B--&gt;C--&gt;D
+B--&gt;E--&gt;F--&gt;C</code></pre><br />
+具体策略与 prompt 生成：</p>
+<ol>
+<li>提取提问中的公司名称/年份信息；</li>
+<li>根据公司名称/年份/意图匹配报表表格字段； </li>
+<li>若匹配到文本类字段与多个年份, 则加入文本比较信息；</li>
+<li>组合匹配到的字段, 生成prompt；<ul>
+<li>文本类字段将字段值加双引号；</li>
+<li>非文本类字段将字段名称加双引号； </li>
+<li>人数类字段结果为XXX有XXX人, 其他字段结果为XXX是XXX；</li>
+<li>金额类字段结果为XXX是XXX元；</li>
+</ul>
+</li>
+<li>prompt给模型产生输出；</li>
+</ol>
+<h3 id="_6">计算分析类</h3>
+<p>问题分析策略：匹配问题中是否出现比值类关键字，找到比值计算公式，根据公式生成问题链，通过问题链回答解析公式中字段对应的值，通过 Python 计算得到结果，组合问题链结果以及计算结果得到回答。</p>
+<ol>
+<li><strong>用户问题</strong>: 在2019年的财务数据中，易华录营业利润率是多少？（保留两位小数）</li>
+<li><strong>匹配计算公式</strong>: 营业利润率=营业利润/营业收入</li>
+<li><strong>问题链</strong>: 2019年易华录的营业利润是多少元? 2019年易华录的营业收入是多少元?</li>
+<li><strong>提取回答进行计算</strong>: 527509725.56/3743903561.80</li>
+<li><strong>最终回答</strong>: 易华录2019年的营业利润是527509725.56元。易华录2019年的营业收入是 3743903561.80元。根据公式，营业利润率=营业利润/营业收入得出结果0.14(14.09%) </li>
+</ol>
+<h3 id="_7">公司信息类</h3>
+<pre class="mermaid"><code>graph TD
+A["识别提问中的公司名称/年份/意图关键词"]
+B["根据关键词和问题分别召回 top3相关文本"]
+C["找到匹配长度最大的文本"]
+D["组合生成 prompt "]
+E["模型输出"]
+A--&gt;B--&gt;C--&gt;D--&gt;E</code></pre>
+<h2 id="_8">优化方向</h2>
+<h3 id="_9">准确性</h3>
+<ul>
+<li>提高召回准确率, 是否能在匹配/语义方向下手；</li>
+<li>增强模型指令遵循的能力, 如何进一步利用简单指令/复杂链式指令/其他指令；</li>
+<li>提高模型自身的知识能力, 数据集，知识库/知识图谱怎么获得？利用什么训练策略；</li>
+</ul>
+<h3 id="_10">速度</h3>
+<ul>
+<li>更精准的召回, 减少需要处理的token数； </li>
+<li>大小模型协同, 多模型协同 ，多模态协同，如何更好的实现agent功能；</li>
+<li>工程方面, 如何cache/量化/加速/压榨gpu性能； </li>
+</ul>
+<h3 id="_11">通用性</h3>
+<ul>
+<li>检索再回答方向, 是否能利用算法完成类似搜索引擎的苟能；</li>
+<li>直接回答方向, 利用微调/全量训练；</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+      
+    
+  </body>
+</html>
