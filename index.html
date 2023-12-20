@@ -10,7 +10,7 @@
       
       
       
-        <link rel="next" href="Pre-version%20Workflow/Data%20Preparation/">
+        <link rel="next" href="Pre-version%20Workflow/Data%20Preparation%20And%20Process/">
       
       
       <link rel="icon" href="assets/images/favicon.png">
@@ -39,8 +39,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"PT Serif";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
@@ -224,7 +224,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="Pre-version%20Workflow/Data%20Preparation/" class="md-tabs__link">
+        <a href="Pre-version%20Workflow/Data%20Preparation%20And%20Process/" class="md-tabs__link">
           
   
   项目先版本流程
@@ -471,53 +471,11 @@
   
   
     <li class="md-nav__item">
-      <a href="Pre-version%20Workflow/Data%20Preparation/" class="md-nav__link">
+      <a href="Pre-version%20Workflow/Data%20Preparation%20And%20Process/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    数据准备
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="Pre-version%20Workflow/Data%20Slice/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    数据切分
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="Pre-version%20Workflow/Data%20Process/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    数据处理
+    数据准备与处理
   </span>
   
 
@@ -854,20 +812,26 @@
 <h3 id="_2">目标产品概述</h3>
 <p>一个旨在深度解析<strong>上市公司年报</strong>的<strong>对话交互智能系统</strong>。面对金融文本中的专业术语与暗含信息，我们致力于用AI实现专家级别的金融分析。</p>
 <h3 id="_3">项目动机</h3>
-<p>在AI领域，虽然已在文本对话取得进展，但真正的金融交互场景仍然是一个巨大挑战。考察过市面上的大多数商业ai金融对话软件或者开源模型后，发现他们在专业性，助手性（是否能满足多维度的金融类助手性任务），交互深度方面均有所欠缺。</p>
+<p>在 AI 领域，虽然已在文本对话取得进展，但真正的金融交互场景仍然是一个巨大挑战。考察过市面上的大多数商业 AI 金融对话软件或者开源模型后，发现他们在专业性，助手性（是否能满足多维度的金融类助手性任务），交互深度方面均有所欠缺。</p>
 <h3 id="_4">问题和创新点</h3>
 <p>为了简化问题和对关键问题进行定点解决，我们的目标是：</p>
 <ul>
-<li>针对上市公司年报建立，微调，优化出一个具有针对性的大语言模型</li>
+<li>针对上市公司年报建立，微调，优化出一个具有针对性的大语言模型；</li>
 <li>其他现有创新点包括：<ul>
-<li>针对单gpu进行了优化，使其甚至能在安卓虚拟框架下运行；</li>
-<li>有类agent体系能更广泛的满足定制化需求。</li>
+<li>针对单 gpu 进行优化,可以利用 <code>llama.cpp</code> 等程序加速，支持量化部署；</li>
+<li>有类 agent 体系能更广泛的满足定制化需求。</li>
 </ul>
 </li>
 </ul>
 <p>上市公司年报为投资者呈现了公司的经营状况、财务状况和未来规划，投行和证券研究团队在这方面的分析解读历来是工作重心，投入了大量人力和资源，金融专业知识和市场直觉是解读的关键，而我们的目标是通过AI技术让这一过程变得更简单、更准确、更便宜，加速企业的投资研究和市场分析，解放投资研究部门的产能，同时也帮助每一个关注市场的投资者都能够打穿信息壁垒。</p>
 <h2 id="_5">模型工作流程</h2>
 <p><img alt="模型工作流程" src="assets/%E6%A8%A1%E5%9E%8B%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" /></p>
+<p>上图为项目模型的工作流程，流程中包含了输入输出和协同工作单位，包含了以下的几个必要环节：</p>
+<ul>
+<li><strong>数据准备</strong>：包括必要的数据转存（PDF 年报数据提取转存为 JSON）、向量库的构建等；</li>
+<li><strong>数据库存储</strong>：包括 SQL 数据库的构建、检索生成增强等；</li>
+<li><strong>回答生成</strong>：包含问答流程中的问题分类、查询操作分类等等；</li>
+</ul>
 
 
 

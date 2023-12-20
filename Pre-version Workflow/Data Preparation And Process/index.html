@@ -12,7 +12,7 @@
         <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../Data%20Slice/">
+        <link rel="next" href="../DataBase%20Storage/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>数据准备 - Financial LLM Project Documentation</title>
+        <title>数据准备与处理 - Financial LLM Project Documentation</title>
       
     
     
@@ -41,8 +41,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"PT Serif";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              数据准备
+              数据准备与处理
             
           </span>
         </div>
@@ -395,7 +395,7 @@
           
   
   <span class="md-ellipsis">
-    数据准备
+    数据准备与处理
   </span>
   
 
@@ -406,7 +406,7 @@
         
   
   <span class="md-ellipsis">
-    数据准备
+    数据准备与处理
   </span>
   
 
@@ -500,52 +500,19 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据分类
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Data%20Slice/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    数据切分
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Data%20Process/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    数据处理
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -880,6 +847,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据分类
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -895,17 +871,17 @@
                   
 
 
-  <h1>数据准备</h1>
+  <h1>数据准备与处理</h1>
 
 <h2 id="_1">数据准备流程</h2>
 <p>数据准备的流程可以细分如下：</p>
 <ol>
-<li><strong>PDF文本和表格提取</strong>：使用如pdfplumber、pdfminer等工具包提取PDF文件中的文本和表格数据。</li>
-<li><strong>数据切分</strong>：根据PDF文件的目录、子目录和章节信息，对内容进行精确的切块处理。</li>
-<li><strong>构建基础金融数据库</strong>：依据金融知识和PDF内容，设计专业的金融数据库字段和格式。例如，定义资产负债表、现金流量表和利润表等。</li>
+<li><strong>PDF文本和表格提取</strong>：使用如 <code>pdfplumber</code>、<code>pdfminer</code> 等工具包提取PDF文件中的文本和表格数据。</li>
+<li><strong>数据切分</strong>：根据 PDF 文件的目录、子目录和章节信息，对内容进行精确的切块处理。</li>
+<li><strong>构建基础金融数据库</strong>：依据金融知识和 PDF 内容，设计专业的金融数据库字段和格式。例如，定义资产负债表、现金流量表和利润表等。</li>
 <li><strong>信息提取</strong>：使用大模型的信息提取能力和NLP技术来抽取对应的金融字段信息。例如，使用JSON方式输出目录的内容，其中章节的名称作为key，页码作为value。同时，请详细地抽取表格内的数据，以JSON格式输出。</li>
 <li>构建金融知识问答库：结合构建的金融数据库，应用大模型构建基础的金融问答库。例如：<br />
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="err">：</span><span class="s2">&quot;某公司2021年的财务费用为多少元？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;某公司2021年的财务费用为XXXX元。&quot;</span><span class="p">}</span>
+<div class="highlight"><span class="filename">JSON</span><pre><span></span><code><span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="err">：</span><span class="s2">&quot;某公司2021年的财务费用为多少元？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;某公司2021年的财务费用为XXXX元。&quot;</span><span class="p">}</span>
 <span class="c1">// (1) prompt:用多种句式修改question及answer的内容。</span>
 
 <span class="p">{</span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="s2">&quot;为什么财务费用可以是负的？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">}</span>
@@ -914,8 +890,8 @@
 <li><strong>构建向量库</strong>：借助于如Word2Vec、Text2Vec等技术，从原始文本数据中提取出语义向量。使用pgvector这种基于PostgreSQL的扩展来存储和索引这些向量，从而建立起一个可供高效查询的大规模向量库。</li>
 <li><strong>应用</strong>：结合向量库、大模型、langchain等工具，提升应用效果。</li>
 </ol>
-<p>为提高团队工作效率，给工程整体绘制一个清晰的框架蓝图，我们构建了如图所示的工作流：<br />
-<img alt="模型工作流" src="../../assets/%E6%A8%A1%E5%9E%8B%E5%B7%A5%E4%BD%9C%E6%B5%81.png" /></p>
+<p>为提高团队工作效率，给工程整体绘制一个清晰的框架蓝图，我们构建了如图所示的工作流：</p>
+<p><img alt="模型工作流" src="../../assets/%E6%A8%A1%E5%9E%8B%E5%B7%A5%E4%BD%9C%E6%B5%81.png" /></p>
 <h2 id="pdf">PDF转存年报</h2>
 <h3 id="_2">解析与抽取</h3>
 <p>年报文件主要以 PDF 格式呈现，为保证数据可以准确地提取出来，我们采用 pdfplumber 进行提取工作。</p>
@@ -931,12 +907,12 @@ snap_x_tolerance：用于在表格提取过程中校正列位置的参数，允�
 <li><code>snap_y_tolerance</code>：用于在表格提取过程中校正行位置的参数，允许垂直方向上的一些偏离。默认值为 <code>None</code>。</li>
 <li><code>intersection_x_tolerance</code>：用于调整表格列位置的参数，允许一些列交叉或合并。默认值为 <code>None</code>。</li>
 </ul>
-<p>因为pdf2txt非常的复杂多变，且麻烦。故我们组在以上pdf2txt程序的使用过程中进行了一定的创新举措和微调处理。</p>
-<p>先glob读取文件排序，再送入15个进程的进程池进行多进程处理。按pdf.pages页遍历处理，每页通过page遍历存储，通过 <code>extract_text_and_tables</code> 函数提取文本和表格，其中表格使用 <code>page.find_tables()</code> 获取到表格数据，遍历表格开始处理，一旦有表格了，那么表格和文本都需要提取，通过 <code>check_lines</code> 函数，提取文本，得到按行的文本，通过 <code>new_table = table.extract()</code> 合并或者去掉一些多余的项，进而得到表格文本；如果没找到表格，调用 <code>check_lines</code> 得到文本，并处理页眉页脚。</p>
+<p>因为 pdf2txt 非常的复杂多变，且麻烦。故我们组在以上 pdf2txt 程序的使用过程中进行了一定的创新举措和微调处理。</p>
+<p>先 glob 读取文件排序，再送入15个进程的进程池进行多进程处理。按pdf.pages页遍历处理，每页通过page遍历存储，通过 <code>extract_text_and_tables</code> 函数提取文本和表格，其中表格使用 <code>page.find_tables()</code> 获取到表格数据，遍历表格开始处理，一旦有表格了，那么表格和文本都需要提取，通过 <code>check_lines</code> 函数，提取文本，得到按行的文本，通过 <code>new_table = table.extract()</code> 合并或者去掉一些多余的项，进而得到表格文本；如果没找到表格，调用 <code>check_lines</code> 得到文本，并处理页眉页脚。</p>
 <p>更加重要的是，我们所做的大模型是针对年报数据的，所以文本转换也必须针对年报类文件，这提供了方便。但问题在于这样有针对性的代码里用了很多正则，碰到某些财报必须人工调整靠肉眼看总结出来。</p>
 <p>经过暑假一个月的陆续调整以及聘请专人做人工标注我们基本积累出共计约一万份财报结构化数据。最后我们把输出按行保存 JSON 格式文本到 alltxt2 目录中，文件名变为 <code>.txt</code> 后缀。</p>
 <p>输出效果示例：<br />
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">165</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[&#39;受的政府补助除外）&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;]&quot;</span><span class="p">}</span>
+<div class="highlight"><span class="filename">JSON</span><pre><span></span><code><span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">165</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[&#39;受的政府补助除外）&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;]&quot;</span><span class="p">}</span>
 <span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">166</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[&#39;委托他人投资或管理资产的损益&#39;, &#39;11,983,529.98&#39;, &#39;9,660,508.21&#39;, &#39;4,469,117.34&#39;, &#39;&#39;]&quot;</span><span class="p">}</span>
 <span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">167</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">}</span>
 <span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">168</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;页脚&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7&quot;</span><span class="p">}</span>
@@ -944,12 +920,13 @@ snap_x_tolerance：用于在表格提取过程中校正列位置的参数，允�
 <span class="p">{</span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;allrow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">172</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;inside&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[&#39;值业务外，持有交易性金融资产、衍生金&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;]&quot;</span><span class="p">}</span>
 </code></pre></div></p>
 <h3 id="_3">页面召回</h3>
-<p>模型应可通过查找到的信息索引到对应的页。</p>
+<p>模型应可通过查找到的信息索引到对应的页。因此在提取信息之后，还需保证每段信息都是可溯源的。这个部分即为<strong>页面召回</strong>。</p>
 <h3 id="_4">表格识别</h3>
-<p>我们考虑应用 camelot-py 实现基于图像识别的表格提取，</p>
-<div class="highlight"><pre><span></span><code><span class="n">row_keywords</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;在职员工&quot;</span><span class="p">,</span><span class="s2">&quot;职工人数&quot;</span><span class="p">,</span><span class="s2">&quot;专业构成&quot;</span><span class="p">,</span><span class="s2">&quot;离退休职&quot;</span><span class="p">,</span>
+<p>我们考虑应用 <code>camelot-py</code> 实现基于图像识别的表格提取，</p>
+<div class="highlight"><span class="filename">Python</span><pre><span></span><code><span class="n">row_keywords</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;在职员工&quot;</span><span class="p">,</span><span class="s2">&quot;职工人数&quot;</span><span class="p">,</span><span class="s2">&quot;专业构成&quot;</span><span class="p">,</span><span class="s2">&quot;离退休职&quot;</span><span class="p">,</span>
 <span class="s2">&quot;生产人员&quot;</span><span class="p">,</span><span class="s2">&quot;销售人员&quot;</span><span class="p">,</span><span class="s2">&quot;技术人员&quot;</span><span class="p">,</span>
-<span class="s2">&quot;行政人员&quot;</span><span class="p">,</span><span class="s2">&quot;管理人员&quot;</span><span class="p">,</span><span class="s2">&quot;业务人员&quot;</span><span class="p">,</span><span class="s2">&quot;教育程度&quot;</span><span class="p">,</span><span class="s2">&quot;硕士&quot;</span><span class="p">,</span><span class="s2">&quot;本科&quot;</span><span class="p">,</span><span class="s2">&quot;大专&quot;</span><span class="p">,</span><span class="s2">&quot;研究生&quot;</span><span class="p">,</span>
+<span class="s2">&quot;行政人员&quot;</span><span class="p">,</span><span class="s2">&quot;管理人员&quot;</span><span class="p">,</span><span class="s2">&quot;业务人员&quot;</span><span class="p">,</span>
+<span class="s2">&quot;教育程度&quot;</span><span class="p">,</span><span class="s2">&quot;硕士&quot;</span><span class="p">,</span><span class="s2">&quot;本科&quot;</span><span class="p">,</span><span class="s2">&quot;大专&quot;</span><span class="p">,</span><span class="s2">&quot;研究生&quot;</span><span class="p">,</span>
 <span class="s2">&quot;专科&quot;</span><span class="p">]</span>
 <span class="n">ei_tables</span> <span class="o">=</span> <span class="n">extract_table_for_rows</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1.5</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">row_keywords</span><span class="p">)),</span><span class="n">min_match_number</span><span class="o">=</span><span class="mf">0.3</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">row_keywords</span><span class="p">),</span><span class="n">required_line_keywords</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;员工情况&quot;</span><span class="p">,</span><span class="s2">&quot;员工的数量&quot;</span><span class="p">,</span><span class="s2">&quot;员工数量&quot;</span><span class="p">,</span><span class="s2">&quot;专业构成&quot;</span><span class="p">,</span><span class="s2">&quot;离退休职工人数&quot;</span><span class="p">,</span><span class="s2">&quot;员工教育结构&quot;</span><span class="p">],</span><span class="n">invalid_line_keywords</span><span class="o">=</span><span class="p">[],</span>
 <span class="n">required_post_keywords</span><span class="o">=</span> <span class="n">row_keywords</span><span class="p">,</span>
@@ -967,7 +944,7 @@ snap_x_tolerance：用于在表格提取过程中校正列位置的参数，允�
 <h2 id="_5">数据集样式示例</h2>
 <h3 id="json">数据集JSON样式示例</h3>
 <p>训练模型所需要的数据集主要包含两个特征：<code>question</code> 和 <code>answer</code> ，</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年其他流动资产第12高的是哪家上市公司？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年其他流动资产第12高的公司是苏美达股份有限公司。&quot;</span><span class="p">}</span>
+<div class="highlight"><span class="filename">JSON</span><pre><span></span><code><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年其他流动资产第12高的是哪家上市公司？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年其他流动资产第12高的公司是苏美达股份有限公司。&quot;</span><span class="p">}</span>
 <span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;注册地址在重庆的上市公司中，2021年营业收入大于5亿的有多少家？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年注册在重庆，营业收入大于5亿的公司一共有4家。&quot;</span><span class="p">}</span>
 <span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;广东华特气体股份有限公司2021年的职工总人数为？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021年广东华特气体股份有限公司职工总人数是1044人。&quot;</span><span class="p">}</span>
 <span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;在保留两位小数的情况下，请计算出金钼股份2019年的流动负债比率&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019金钼股份流动负债比率是61.10%。其中流动负债是1068418275.97元；总负债是1748627619.69元；&quot;</span><span class="p">}</span>
@@ -983,6 +960,13 @@ snap_x_tolerance：用于在表格提取过程中校正列位置的参数，允�
 <span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;请具体描述一下2020年仲景食品控股股东是否发生变更。&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020年，仲景食品控股股东没有发生变更。&quot;</span><span class="p">}</span>
 <span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;什么是其他债权投资？&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;其他债权投资是指企业或机构投资者通过购买债券、贷款、定期存款等金融产品获得的固定收益。这些金融产品通常由政府、公司或其他机构发行，具有一定的信用等级和风险。\n\n其他债权投资是企业或机构投资组合中的一部分，通常用于稳定收益和分散风险。与股票投资相比，其他债权投资的风险较低，但收益也相对较低。\n\n其他债权投资的管理和投资策略与其他资产类别类似，包括分散投资、风险控制、收益最大化等。然而，由于其他债权投资的种类繁多，其投资和管理也存在一定的特殊性。&quot;</span><span class="p">}</span>
 </code></pre></div>
+<h2 id="_6">数据分类</h2>
+<p>切分得到的数据应分类为如下的类别：</p>
+<ul>
+<li><strong>基础信息</strong>：例如：公司名称，年报撰写时间等等；</li>
+<li><strong>财务数据</strong>：例如：资产负债表等等；</li>
+<li><strong>综合信息</strong>：例如：财务指标等等；</li>
+</ul>
 
 
 
