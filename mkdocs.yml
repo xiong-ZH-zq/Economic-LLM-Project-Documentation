@@ -17,8 +17,8 @@ theme:
       primary: blue grey
   features:
     - navigation.tabs
-  font:
-    text: PT Serif
+  # font:
+  #   text: PT Serif
 
 markdown_extensions:
   - meta
@@ -52,9 +52,7 @@ extra:
 nav:
   - 项目简介: index.md
   - 项目先版本流程: 
-    - 数据准备: Pre-version Workflow/Data Preparation.md
-    - 数据切分: Pre-version Workflow/Data Slice.md 
-    - 数据处理: Pre-version Workflow/Data Process.md
+    - 数据准备与处理: Pre-version Workflow/Data Preparation And Process.md
     - 数据库存储: Pre-version Workflow/DataBase Storage.md
     - 模型问答流程: Pre-version Workflow/FAQ.md
   - 模型微调:

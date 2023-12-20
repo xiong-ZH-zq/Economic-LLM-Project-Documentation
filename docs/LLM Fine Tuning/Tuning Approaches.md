@@ -50,15 +50,15 @@
 示例代码：
 
 - 2019年负债总金额第7高的上市公司为？
-```sql
+```sql title="SQL"
 SELECT 公司全称 FROM company_table WHERE 年份 = '2019' AND 负债合计 IS NOT NULL ORDER BY 负债合计 DESC LIMIT 1 OFFSET 6 
 ```
 - 2020年其他流动资产最高的前三家上市公司是哪些家？ 
-```sql
+```sql title="SQL"
 SELECT 公司全称 FROM company_table WHERE 年份 = '2020' AND 其他流动资产 IS NOT NULL ORDER BY 其他流动资产 DESC LIMIT 3 
 ```
 - 2020年营业总收入最高的7家并且曾经在武汉注册的上市公司是？金额是？
-```sql 
+```sql title="SQL"
 SELECT 公司全称, 营业总收入 FROM company_table WHERE 年份 = '2020' AND 注册地址 LIKE '%武汉%' AND 营业总收入 IS NOT NULL ORDER BY 营业总收入 DESC LIMIT 7 
 ```
 
